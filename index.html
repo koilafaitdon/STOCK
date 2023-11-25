@@ -9,15 +9,23 @@
     <div id="class"></div>
 
     <script>
-        const containerDiv = document.querySelector('div.container-fluid');
+        document.addEventListener('DOMContentLoaded', function () {
+    fetch('https://fruityblox.com/stock')
+        .then(response => response.text())
+        .then(data => {
+            const containerDiv = new DOMParser().parseFromString(data, 'text/html').querySelector('div.container-fluid');
 
-        if (containerDiv) {
-            const page = document.getElementById("class");
-            page.innerHTML = containerDiv.innerHTML;
-            console.log(containerDiv.innerHTML);
-        } else {
-            console.error('La balise <div class="container-fluid"> n\'a pas été trouvée. ('+containerDiv.innerHTML+')');
-        }
+            if (containerDiv) {
+                const page = document.getElementById("class");
+                page.innerHTML = containerDiv.innerHTML;
+                console.log(containerDiv.innerHTML);
+            } else {
+                console.error('La balise <div class="container-fluid"> n\'a pas été trouvée.');
+            }
+        })
+        .catch(error => console.error('Erreur lors de la récupération du contenu :', error));
+});
+
     </script>
 </body>
 </html>
