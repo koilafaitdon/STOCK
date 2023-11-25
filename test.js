@@ -1,7 +1,7 @@
 // test.js
 fetch("https://fruityblox.com/stock", {
     method: "GET",
-    mode: "cors", 
+    mode: "no-cors", 
 })
     .then(response => response.text())
     .then(html => {
