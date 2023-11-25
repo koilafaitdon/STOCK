@@ -1,4 +1,3 @@
-// test.js
 fetch("https://fruityblox.com/stock", {
     method: "GET",
     mode: "no-cors", 
