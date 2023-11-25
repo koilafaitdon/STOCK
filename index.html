@@ -18,6 +18,8 @@
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
+        console.log(doc)
+
         const containerDiv = doc.querySelector('div.container-fluid');
 
         if (containerDiv) {
