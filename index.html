@@ -3,11 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="test.js"></script>
     <title>Blox fruit stock</title>
 </head>
 <body>
     <div id="class"></div>
 </body>
+    <script>
+        fetch("https://fruityblox.com/stock", {
+    method: "GET",
+    mode: "no-cors", 
+})
+    .then(response => response.text())
+    .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const containerDiv = doc.querySelector('div.container-fluid');
+
+        if (containerDiv) {
+            const page = document.getElementById("class");
+            page.innerHTML = containerDiv.innerHTML;
+            console.log(containerDiv.innerHTML);
+        } else {
+            console.error('La balise <div class="container-fluid"> n\'a pas été trouvée.');
+        }
+    })
+    .catch(error => console.error("Une erreur s'est produite : ", error));
+    </script>
 </html>
 
