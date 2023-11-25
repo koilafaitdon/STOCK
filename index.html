@@ -9,29 +9,24 @@
     <div id="class"></div>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-    fetch('https://fruityblox.com/stock', { mode: 'no-cors' })
-        .then(response => response.text())
-        .then(data => {
-            console.log('Content retrieved:', data);
-            const containerDiv = new DOMParser().parseFromString(data, 'text/html').querySelector('div.container-fluid');
+        fetch("/getData")
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
 
-            if (containerDiv) {
-                console.log('Element with class "container-fluid" found:', containerDiv);
-                const page = document.getElementById("class");
-                if (page) {
+                const containerDiv = doc.querySelector('div.container-fluid');
+
+                if (containerDiv) {
+                    const page = document.getElementById("class");
                     page.innerHTML = containerDiv.innerHTML;
                     console.log(containerDiv.innerHTML);
                 } else {
-                    console.error('Element with id "class" not found.');
+                    console.error('La balise <div class="container-fluid"> n\'a pas été trouvée.');
                 }
-            } else {
-                console.error('Element with class "container-fluid" not found.');
-            }
-        })
-        .catch(error => console.error('Error fetching content:', error));
-});
-
+            })
+            .catch(error => console.error("Une erreur s'est produite : ", error));
     </script>
 </body>
 </html>
+
